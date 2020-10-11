@@ -2,19 +2,11 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+
 
 .App-header {
-  background-color: #282c34;
+  background-color: #93dff1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,15 +16,46 @@
   color: white;
 }
 
+.stamp{
+  text-align: center;
+}
+
 .App-link {
   color: #61dafb;
 }
+.stamp {
+  position: relative;
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  padding: 15px;
+  background-color: white;
+  box-shadow:inset 0px 0px 0px 4px rgb(0, 0, 0);
+}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.stamp:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("http://i.imgur.com/5O74VI6.jpg");
+  mix-blend-mode: lighten;
+}
+.bold{
+  font-size: calc(5px + 5vmin);
+}
+.input-form{
+  margin-top: 50px;
+
+}
+
+.hidden{
+  display: none;
+}
+.notFound{
+  text-transform: unset;
+  color: rgb(255, 255, 255);
+  background-color: rgb(131, 19, 19);
+  padding: 15px;
 }
