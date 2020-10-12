@@ -8,7 +8,8 @@ class Form extends React.Component {
       this.state = {
         authors: [],
         authorsJson: [],
-        isLoaded: false,
+        phone:"",
+      isLoaded: false,
         dataOk: false,
         ICONumber: "",
         value: "",
@@ -59,6 +60,7 @@ class Form extends React.Component {
   }
   
   
+  
     render() {
       const { authorsJson } = this.state;
       const { isLoaded } = this.state;
@@ -101,15 +103,14 @@ class Form extends React.Component {
               {street} {streetNum1}, {city} {PSC}{" "}
             </p>
             <p>IČO: {ICO} </p>
+            <p style={this.state.phone ?{display:""}:{display:"none"}}>Tel.: {this.state.phone} </p>
           </article>
           <form className="input-form" onSubmit={this.handleSubmit}>
           <div className="input-group mb-3">
           <div className="input-group-prepend">
       <span className="input-group-text" id="inputGroup-sizing-default">Vaše IČO:</span>
     </div>
-  
-        
-            <input
+   <input
             id="basic-addon1"
             onChange={this.changeHandler}
             type="text"
@@ -121,7 +122,15 @@ class Form extends React.Component {
       
     </div>
     <button style={this.state.isLoaded ?{display:""}:{display:"none"}}  type="button" className="btn btn-success">Objednat</button>
-            </div>
+
+</div>
+        <input className="input-group-text"
+        onChange={this.changeHandler}
+        type="text"
+        name="phone"
+        placeholder="přidat telefonní číslo"
+        value={this.state.phone} 
+        />
           </form>
         </div>
       );
