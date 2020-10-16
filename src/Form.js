@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import axios from "axios";
+import FormForm from "./AddPhone.js";
+
 
 class Form extends React.Component {
     constructor() {
@@ -51,6 +53,8 @@ class Form extends React.Component {
         .catch(function (error) {
           console.log(error);
         }); }, 1000);}
+
+        
   }
   
   changeHandler = (e) => {
@@ -90,6 +94,11 @@ class Form extends React.Component {
         authorsJson.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:PSC"]._text;
   
       return (
+
+
+
+
+        
         <div className="App-header">
          <p style={this.state.isLoaded ?{display:"none"}:{display:""}}> Zadejde Vaše Ičo pro vyhotovení návrhu razítka</p>
   
@@ -97,6 +106,7 @@ class Form extends React.Component {
          <p className="notFound" style={this.state.noFound ? {display:""}:{display:"none"}}>Subjekt podle zadaného čísla nebyl nalezen</p>
   
           <article className="stamp" style={this.state.isLoaded ?{display:""}:{display:"none"}}>
+          
             <span className="bold">
           {nameOfSubject}</span>
             <p>
@@ -124,14 +134,11 @@ class Form extends React.Component {
     <button style={this.state.isLoaded ?{display:""}:{display:"none"}}  type="button" className="btn btn-success">Objednat</button>
 
 </div>
-        <input className="input-group-text"
-        onChange={this.changeHandler}
-        type="text"
-        name="phone"
-        placeholder="přidat telefonní číslo"
-        value={this.state.phone} 
-        />
+      
+       <FormForm changeHandler={this.changeHandler} phone={this.state.phone}/>
+     
           </form>
+          
         </div>
       );
     }
