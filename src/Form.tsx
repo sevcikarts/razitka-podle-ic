@@ -8,19 +8,18 @@ type Props = {
   value: string;
   authors: any[];
   authorsJson: {
-    nameOfSubject:string,
-    ICO:string,
-    street:string,
-    streetNum1:string,
-    city:string,
-    PSC:string,
+    nameOfSubject: string;
+    ICO: string;
+    street: string;
+    streetNum1: string;
+    city: string;
+    PSC: string;
   };
   phone: string;
   isLoaded: boolean;
   dataOk: boolean;
   ICONumber: string;
   noFound: boolean;
-  nameOfSubjectLive: string;
 };
 
 class Form extends React.Component<{}, Props> {
@@ -28,14 +27,13 @@ class Form extends React.Component<{}, Props> {
     super(props);
     this.state = {
       authors: [],
-      nameOfSubjectLive:"",
       authorsJson: {
-        nameOfSubject:"",
-        ICO:"",
-        street:"",
-        streetNum1:"",
-        city:"",
-        PSC:"",
+        nameOfSubject: "",
+        ICO: "",
+        street: "",
+        streetNum1: "",
+        city: "",
+        PSC: "",
       },
       phone: "",
       isLoaded: false,
@@ -72,48 +70,37 @@ class Form extends React.Component<{}, Props> {
             let obj = JSON.parse(result);
             console.log(result);
             let dataOne = obj.Ares_odpovedi.Odpoved["D:PZA"]._text;
-            const nameOfSubject =
-              obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:ZAU"]["D:OF"]._text;
-            const ICO =
-              obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:ZAU"]["D:ICO"]._text;
-            const street =
-              obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:NU"]._text;
-            const streetNum1 =
-              obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:CD"]._text;
-            const city =
-              obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:N"]._text;
-            const PSC =
-              obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:PSC"]._text;
+
 
             this.setState({
-              authorsJson: {
-                nameOfSubject:nameOfSubject,
-                ICO:ICO,
-                street:street,
-                streetNum1:streetNum1,
-                city:city,
-                PSC:PSC,
-              },
-              nameOfSubjectLive:nameOfSubject,
               isLoaded: dataOne === "1",
               noFound: dataOne === "0",
-            })
+
+             authorsJson: {
+                nameOfSubject: dataOne === "1"  && obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:ZAU"]["D:OF"]._text ,
+                ICO: dataOne === "1"  && obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:ZAU"]["D:ICO"]._text,
+                street: dataOne === "1"  && obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:NU"]._text,
+                streetNum1:dataOne === "1"  &&  obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:CD"]._text,
+                city: dataOne === "1"  && obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:N"]._text,
+                PSC: dataOne === "1"  && obj.Ares_odpovedi.Odpoved["D:Vypis_RES"]["D:SI"]["D:PSC"]._text,
+              },
+              
+            });
           })
           .catch(function (error) {
-            console.log(error)
+            console.log(error);
           });
       }, 1000);
     }
   };
 
- 
-  changeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+  changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       value: e.target.value,
     });
   };
 
-  changePhoneHandler = (e:ChangeEvent<HTMLInputElement>) => {
+  changePhoneHandler = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       phone: e.target.value,
     });
@@ -140,8 +127,12 @@ class Form extends React.Component<{}, Props> {
         >
           Subjekt podle zadaného čísla nebyl nalezen
         </p>
-        <StampView authorsJson={authorsJson} isLoaded={isLoaded}phone={this.state.phone}/>
-       
+        <StampView
+          authorsJson={authorsJson}
+          isLoaded={isLoaded}
+          phone={this.state.phone}
+        />
+
         <form className="input-form" onSubmit={this.handleSubmit}>
           <div className="input-group mb-3">
             <div className="input-group-prepend">
@@ -157,21 +148,17 @@ class Form extends React.Component<{}, Props> {
               aria-describedby="basic-addon1"
               aria-label="Username"
             />{" "}
-            
             <div className="input-group-prepend" id="button-addon3">
-              <button 
-              onClick={()=>this.handleSubmit}
-              className="btn btn-outline-secondary" 
-              name="ICONumber"
-              type="submit">
+              <button
+                onClick={() => this.handleSubmit}
+                className="btn btn-outline-secondary"
+                name="ICONumber"
+                type="submit"
+              >
                 Vyhotovit návrh
-
               </button>
             </div>
             <button
-              
-             
-              
               style={
                 this.state.isLoaded ? { display: "" } : { display: "none" }
               }
@@ -182,7 +169,10 @@ class Form extends React.Component<{}, Props> {
             </button>
           </div>
         </form>
-         <AddPhone changeHandler={this.changePhoneHandler}phone={this.state.phone}/>
+        <AddPhone
+          changeHandler={this.changePhoneHandler}
+          phone={this.state.phone}
+        />
       </div>
     );
   }
