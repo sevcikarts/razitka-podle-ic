@@ -1,21 +1,26 @@
 import React from "react";
+import { ChangeEvent } from "react";
 import "./App.css";
 
+type Props = {
+    changeHandler: (e:ChangeEvent<HTMLInputElement>)  => void;
+    phone: string;
+}
 
-const AddPhone = (props) => {
 
-    
+const AddPhone = (props: Props) => {
 
     return (
         <div>
          
           <input
             className="input-group-text"
-            onChange={props.changeHandler}
             type="text"
+            value={props.phone}
+            onChange={props.changeHandler}
             name="phone"
             placeholder="přidat telefonní číslo"
-            value={props.phone}
+            
             />  
         </div>
     )
